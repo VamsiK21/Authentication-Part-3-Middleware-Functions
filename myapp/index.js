@@ -94,7 +94,7 @@ app.get("/books/:bookId/", async (request, response) => {
 app.post("/users/", async (request, response) => {
   const { username, name, password, gender, location } = request.body;
   const hashedPassword = await bcrypt.hash(request.body.password, 10);
-  const selectUserQuery = `SELECT * FROM user WHERE username = '${username}'`;
+  const selectUserQuery = `SELECT * FROM user WHERE username = '${username}';`;
   const dbUser = await db.get(selectUserQuery);
   if (dbUser === undefined) {
     const createUserQuery = `
@@ -119,7 +119,7 @@ app.post("/users/", async (request, response) => {
 //User Login API
 app.post("/login/", async (request, response) => {
   const { username, password } = request.body;
-  const selectUserQuery = `SELECT * FROM user WHERE username = '${username}'`;
+  const selectUserQuery = `SELECT * FROM user WHERE username = '${username}';`;
   const dbUser = await db.get(selectUserQuery);
   if (dbUser === undefined) {
     response.status(400);
